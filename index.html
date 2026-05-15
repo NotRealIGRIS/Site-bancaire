@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Said Banking — Private Banking</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏦</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ═══════════════════════════════ AUTH ═══════════════════════════════ -->
+  <div id="auth">
+    <div class="auth-left">
+      <div class="al-brand">
+        <div class="al-wordmark">Said</div>
+        <div class="al-tagline">Private Banking</div>
+      </div>
+      <div class="al-quote">
+        <p>"Banking built on trust, discretion, and a commitment to your financial future."</p>
+        <cite>Said Banking — Est. 2025</cite>
+      </div>
+      <div class="al-dots">
+        <div class="al-dot"></div>
+        <div class="al-dot"></div>
+        <div class="al-dot"></div>
+      </div>
+    </div>
+    <div class="auth-right">
+      <div class="auth-form">
+        <h2 id="a-title">Welcome back</h2>
+        <p id="a-desc">Access your Said Banking account</p>
+        <div class="msg-err" id="a-err"></div>
+        <div class="msg-suc" id="a-suc"></div>
+        <div class="f-group" id="name-grp" style="display:none">
+          <label class="f-label">Full name</label>
+          <input class="f-input" id="r-name" type="text" placeholder="Your full name" autocomplete="name" />
+        </div>
+        <div class="f-group">
+          <label class="f-label">Email address</label>
+          <input class="f-input" id="a-email" type="email" placeholder="you@example.com" autocomplete="email" />
+        </div>
+        <div class="f-group">
+          <label class="f-label">Password</label>
+          <input class="f-input" id="a-pass" type="password" placeholder="••••••••" autocomplete="current-password" />
+        </div>
+        <button class="btn-ink" id="a-btn">Sign In</button>
+        <div class="auth-divider">or</div>
+        <div class="demo-hint">
+          <strong>Demo account:</strong><br />
+          said@bank.com &nbsp;/&nbsp; pass123
+        </div>
+        <div class="auth-switch">
+          <span id="a-sw-txt">No account? </span><a id="a-sw">Create one</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════ DASHBOARD ════════════════════════════ -->
+  <div id="dash">
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <div class="tb-brand">
+        <div class="tb-name">SAID</div>
+        <div class="tb-sep"></div>
+        <div class="tb-sub">Private Banking</div>
+      </div>
+      <div class="tb-right">
+        <div class="tb-avatar" id="tb-av">SB</div>
+        <div class="tb-user" id="tb-user">Said</div>
+        <button class="tb-logout" onclick="logout()">Sign out</button>
+      </div>
+    </div>
+
+    <!-- Top Nav (tablet / desktop) -->
+    <div class="nav-top">
+      <div class="nt-item on" onclick="tab('overview', this, 'top')">Overview</div>
+      <div class="nt-item" onclick="tab('transfer', this, 'top')">Transfer</div>
+      <div class="nt-item" onclick="tab('advisor', this, 'top')">AI Advisor</div>
+      <div class="nt-item" onclick="tab('profile', this, 'top')">Profile</div>
+    </div>
+
+    <!-- Content -->
+    <div class="body">
+
+      <!-- OVERVIEW -->
+      <div class="tc on" id="tc-overview">
+        <div class="cards-row" id="acc-grid"></div>
+        <div class="stat-row" id="stat-row"></div>
+        <div class="section-head">
+          <div class="s-title">Transaction History</div>
+          <div class="s-count" id="tx-count"></div>
+        </div>
+        <div class="tx-card" id="tx-list"></div>
+      </div>
+
+      <!-- TRANSFER -->
+      <div class="tc" id="tc-transfer">
+        <div class="trf-wrap">
+          <div class="trf-card">
+            <div class="trf-title">Move Funds</div>
+            <div class="trf-sub">Transfer between your Said Banking accounts instantly</div>
+            <div class="msg-suc" id="trf-suc" style="display:none"></div>
+            <div class="msg-err" id="trf-err" style="display:none"></div>
+            <div class="f-group">
+              <label class="f-label">From</label>
+              <select class="f-select" id="trf-from"></select>
+            </div>
+            <div class="f-group">
+              <label class="f-label">To</label>
+              <select class="f-select" id="trf-to"></select>
+            </div>
+            <div class="trf-divider"></div>
+            <div class="f-group">
+              <label class="f-label">Amount</label>
+              <div class="amt-wrap">
+                <span class="amt-sym">€</span>
+                <input class="f-input" id="trf-amt" type="number" placeholder="0.00" min="0.01" step="0.01" />
+              </div>
+            </div>
+            <div class="f-group">
+              <label class="f-label">Reference</label>
+              <input class="f-input" id="trf-ref" type="text" placeholder="e.g. Monthly savings" />
+            </div>
+            <button class="btn-gold" onclick="doTransfer()">Confirm Transfer</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI ADVISOR -->
+      <div class="tc" id="tc-advisor">
+        <div class="chat-wrap">
+          <div class="chat-box" id="chat-box"></div>
+          <div class="chat-qr">
+            <button class="qr-btn" onclick="qa('What is my total balance?')">Total balance</button>
+            <button class="qr-btn" onclick="qa('Summarize my recent spending')">Spending</button>
+            <button class="qr-btn" onclick="qa('Give me a savings tip')">Save more</button>
+            <button class="qr-btn" onclick="qa('How can I grow my wealth?')">Grow wealth</button>
+          </div>
+          <div class="chat-row">
+            <input type="text" id="chat-in" placeholder="Ask your advisor..." />
+            <button class="send-btn" id="send-btn" onclick="sendMsg()">Send</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROFILE -->
+      <div class="tc" id="tc-profile">
+        <div class="profile-wrap">
+          <div class="profile-hero">
+            <div class="profile-av" id="p-av">SB</div>
+            <div>
+              <div class="profile-name" id="p-name">Said Banking</div>
+              <div class="profile-email" id="p-email">said@bank.com</div>
+              <div class="profile-since">Member since 2025</div>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-row">
+              <span class="info-key">Account status</span>
+              <span class="info-val"><span class="status-pill"><span class="status-dot"></span>Active</span></span>
+            </div>
+            <div class="info-row"><span class="info-key">Account tier</span><span class="info-val">Private Client</span></div>
+            <div class="info-row"><span class="info-key">Accounts</span><span class="info-val" id="p-accs">2</span></div>
+            <div class="info-row"><span class="info-key">Total balance</span><span class="info-val" id="p-total">—</span></div>
+            <div class="info-row"><span class="info-key">Last sign in</span><span class="info-val" id="p-last">—</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /body -->
+
+    <!-- Bottom Nav (mobile) -->
+    <div class="nav-bottom">
+      <div class="nb-items">
+        <div class="nb-item on" onclick="tab('overview', this, 'bottom')">
+          <i class="ti ti-home" aria-hidden="true"></i>
+          <div class="nb-label">Home</div>
+        </div>
+        <div class="nb-item" onclick="tab('transfer', this, 'bottom')">
+          <i class="ti ti-arrows-exchange" aria-hidden="true"></i>
+          <div class="nb-label">Transfer</div>
+        </div>
+        <div class="nb-item" onclick="tab('advisor', this, 'bottom')">
+          <i class="ti ti-message-circle" aria-hidden="true"></i>
+          <div class="nb-label">Advisor</div>
+        </div>
+        <div class="nb-item" onclick="tab('profile', this, 'bottom')">
+          <i class="ti ti-user" aria-hidden="true"></i>
+          <div class="nb-label">Profile</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /dash -->
+
+</div><!-- /app -->
+
+<script src="js/db.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
