@@ -56,7 +56,10 @@ python3 -m http.server 3000
 - Vanilla HTML, CSS, JavaScript — zero dependencies, zero build step
 - [Cormorant Garamond](https://fonts.google.com/specimen/Cormorant+Garamond) + [Inter](https://fonts.google.com/specimen/Inter) from Google Fonts
 - [Tabler Icons](https://tabler-icons.io) webfont via jsDelivr
+- 
+website: https://staticfile-notrealigris.wasmer.app
 
 ---
+
 Said Banking © 2025 — Private Banking Portal
 website: 
